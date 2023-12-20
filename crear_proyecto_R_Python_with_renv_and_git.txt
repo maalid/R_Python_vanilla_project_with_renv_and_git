@@ -1,0 +1,53 @@
+0. Abrir RStudio
+
+	a. Asegurarse que no se está en ningún proyecto
+	b. Se debe tener instalado Python en el PC
+
+1. Crear nuevo projecto en RStudio
+
+File > New Project > New Directory > New Project
+
+	a. Ingresar nombre del proyecto en "Directory name:"
+	b. Ingresar path del proyecto en "Create project as subdirectory of:"
+	c. Habilitar "Create a git repository"
+	d. Habilitar "Use renv with this project"
+	e. Habilitar "Open in new session" (esto es opcional)
+	f. Crear proyecto con boton "Create Project"
+
+2. Instalar {reticulate} usando {renv}
+
+renv::install(packages = 'reticulate')
+
+3. Crear ambiente virtual con Python usando {renv}
+
+renv::use_python(type = 'virtualenv',
+                 name = '.venv')
+
+	a. Seleccionar la versión de Python a usar, dentro de la lista de opciones que RStudio propone
+
+4. Instalar librerías necesarias para trabajar en proyecto
+
+	a. Librerías de R, usando {renv}
+
+		renv::install(packages = 'dplyr')
+
+	b. Librerías Python, usando {reticulate}
+
+		reticulate::py_install(packages = c('pandas==2.1.4', 'datar'))
+
+5. Crear snapshot del ambiente. Actualizará los archivos 'renv.lock' y 'requirements.txt'
+   con las librerías y versiones instaladas
+
+renv::snapshot()
+
+6. Actualizar .gitignore, agregando el folder .venv
+
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.venv/
+
+7. Crear Repo en GitHub
+
+8. 
