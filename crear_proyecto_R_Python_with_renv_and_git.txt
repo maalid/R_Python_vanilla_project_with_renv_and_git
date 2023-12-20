@@ -1,18 +1,18 @@
 0. Abrir RStudio
 
-	a. Asegurarse que no se está en ningún proyecto
-	b. Se debe tener instalado Python en el PC
+  a. Asegurarse que no se está en ningún proyecto
+  b. Se debe tener instalado Python en el PC
 
 1. Crear nuevo projecto en RStudio
 
 File > New Project > New Directory > New Project
 
-	a. Ingresar nombre del proyecto en "Directory name:"
-	b. Ingresar path del proyecto en "Create project as subdirectory of:"
-	c. Habilitar "Create a git repository"
-	d. Habilitar "Use renv with this project"
-	e. Habilitar "Open in new session" (esto es opcional)
-	f. Crear proyecto con boton "Create Project"
+  a. Ingresar nombre del proyecto en "Directory name:"
+  b. Ingresar path del proyecto en "Create project as subdirectory of:"
+  c. Habilitar "Create a git repository"
+  d. Habilitar "Use renv with this project"
+  e. Habilitar "Open in new session" (esto es opcional)
+  f. Crear proyecto con boton "Create Project"
 
 2. Instalar {reticulate} usando {renv}
 
@@ -23,17 +23,17 @@ renv::install(packages = 'reticulate')
 renv::use_python(type = 'virtualenv',
                  name = '.venv')
 
-	a. Seleccionar la versión de Python a usar, dentro de la lista de opciones que RStudio propone
+  a. Seleccionar la versión de Python a usar, dentro de la lista de opciones que RStudio propone
 
 4. Instalar librerías necesarias para trabajar en proyecto
 
-	a. Librerías de R, usando {renv}
+  a. Librerías de R, usando {renv}
 
-		renv::install(packages = 'dplyr')
+    renv::install(packages = 'dplyr')
 
-	b. Librerías Python, usando {reticulate}
+  b. Librerías Python, usando {reticulate}
 
-		reticulate::py_install(packages = c('pandas==2.1.4', 'datar'))
+    reticulate::py_install(packages = c('pandas==2.1.4', 'datar'))
 
 5. Crear snapshot del ambiente. Actualizará los archivos 'renv.lock' y 'requirements.txt'
    con las librerías y versiones instaladas
@@ -48,6 +48,52 @@ renv::snapshot()
 .Ruserdata
 .venv/
 
-7. Crear Repo en GitHub
+7. Stage and commit
 
-8. 
+If your local project was already a Git repo and was up-to-date, move on. Otherwise, you probably need to stage and commit.
+
+  a. Click the “Git” tab in upper right pane
+  b. Check “Staged” box for all files you want to commit.
+    Default: stage everything
+    When to do otherwise: this will all go to GitHub. So consider if that is appropriate for each file. 
+                          You can absolutely keep a file locally, without committing it to the Git repo and sending to GitHub. 
+                          Just let it sit there in your Git pane, without being staged. No harm will be done. 
+                          If this is a long-term situation, list the file in .gitignore.
+  c. If you’re not already in the Git pop-up, click “Commit”
+  d. Type a message in “Commit message”.
+  e. Click “Commit”
+
+8. Create and connect a GitHub repo
+
+  a. First, you need to create a new repo on GitHub.
+  b. Go to https://github.com and make sure you are logged in.
+    Near “Repositories”, click the big green “New” button. Or, if you are on your own profile page, click on “Repositories”, then click the big green “New” button.
+      How to fill this in:
+        Repository template: No template.
+        Repository name: Ideally this will be the name of your local project’s directory (and RStudio Project). 
+                         Why confuse yourself? But it must be a valid GitHub repo name, which means only letters, digits, -, ., or _ are allowed. 
+                         For future projects, think about this in advance, i.e. make sure each project’s local name is also a valid GitHub repo name.
+        Description: “Analysis of the stuff” or any short description of the project. Write this for humans.
+        Public or Private.
+        DO NOT initialize this repository with anything.
+        Click the big green button that says “Create repository”.
+  c. Now click the big green button that says “<> Code”.
+  d. Copy a clone URL to your clipboard. If you’re taking our default advice, copy the HTTPS URL. But if you’re opting for SSH, then make sure to copy the SSH URL.
+
+9. Connect local repo to GitHub repo with RStudio
+
+  a. Click on the “two purple boxes and a white square” in the Git pane. Click “Add remote”. 
+  b. Paste the GitHub repo’s URL here and pick a remote name, almost certainly origin. 
+  c. Now “Add”.
+  d. We should be back in the “New Branch” dialog (if not, click on the “two purple boxes and a white square” in the Git pane again). 
+     I assume you’re on the main branch and want it to track main on GitHub (or whatever default branch you are using). 
+  e. Enter main as the branch name and make sure “Sync branch with remote” is checked. 
+  f. Click “Create” (yes, even though the branch already exists). 
+  g. In the next dialog, choose “overwrite”.
+
+10. Enjoy!
+
+
+Referencias:
+
+[1] GitHub repo & RStudio, https://happygitwithr.com/existing-github-last
